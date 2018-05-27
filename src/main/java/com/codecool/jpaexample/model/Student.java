@@ -3,24 +3,24 @@ package com.codecool.jpaexample.model;
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Student {
 
+    @ElementCollection
+    @CollectionTable(name = "Phone")
+    List<String> phoneNumbers;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String name;
     @Column(unique = true, nullable = false)
     private String email;
-
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
-
     @Transient
     private long age;
-
     @OneToOne
     private Address address;
 
@@ -38,6 +38,11 @@ public class Student {
     public Student(String name, String email, Date dateOfBirth, Address address) {
         this(name, email, dateOfBirth);
         this.address = address;
+    }
+
+    public Student(String name, String email, Date dateOfBirth, Address address, List<String> phoneNumbers) {
+        this(name, email, dateOfBirth, address);
+        this.phoneNumbers = phoneNumbers;
     }
 
     public long getId() {
