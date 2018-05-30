@@ -12,12 +12,19 @@ public class Klass {
     private String name;
     @OneToMany(mappedBy = "klass")
     private Set<Student> students = new HashSet<>();
+    @Enumerated
+    private CCLocation ccLocation;
 
     public Klass() {
     }
 
     public Klass(String name) {
         this.name = name;
+    }
+
+    public Klass(String name, CCLocation ccLocation) {
+        this(name);
+        this.ccLocation = ccLocation;
     }
 
     public String getName() {
