@@ -23,6 +23,8 @@ public class Student {
     private long age;
     @OneToOne
     private Address address;
+    @ManyToOne
+    private Klass klass;
 
     public Student() {
     }
